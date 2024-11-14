@@ -1,0 +1,16 @@
+- name: Instalar Nginx en EC2
+  hosts: web
+  become: true
+  tasks:
+    - name: Actualizar paquetes de la instancia
+      apt:
+        update_cache: yes
+
+    - name: Instalar Nginx
+      apt:
+        name: nginx
+        state: present
+    - name: Crear pagina HTML
+      copy:
+        content: "<h1> Bienvenido a mi servidor web Nginx! </h1>"
+        dest: /var/www/html/index.html
